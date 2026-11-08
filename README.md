@@ -16,3 +16,4 @@ Para asegurar una comparación justa y evitar problemas con librerías del siste
 - **Versión ASM Inline:** Se gestionó el acceso a la memoria de 32 a 64 bits combinando las instrucciones `movslq` (Move with Sign-Extension) para cargar datos, `imul` (multiplicación con signo) y `add`. Operar sobre registros directamente (`%rax` y `%rcx` nativos) acelera la manipulación del indexado.
 
 ## Capturas de Pantalla
+<img width="1420" height="266" alt="image" src="https://github.com/user-attachments/assets/9d81447d-ca39-408e-80dd-35af8e3e0cda" />
