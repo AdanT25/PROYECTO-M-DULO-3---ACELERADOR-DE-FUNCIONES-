@@ -1,6 +1,7 @@
 # Proyecto Módulo 3: Acelerador de Funciones
 
-**Nombre del Alumno:** Torres Enriquez Braulio Adan
+**Nombre:** Torres Enriquez Braulio Adan
+**Link video:** https://youtu.be/CbWFkfZ8UPw
 
 ## Descripción del Proyecto
 Este proyecto desarrolla un programa en C híbrido que compara el rendimiento computacional de calcular el producto punto de dos vectores de enteros (32 bits) usando un bucle estándar en C puro frente a una función optimizada de ensamblador inline (x86-64). 
