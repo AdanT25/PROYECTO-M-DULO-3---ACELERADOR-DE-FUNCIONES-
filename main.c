@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define N 10000000 // 10 millones de elementos[cite: 8]
+#define N 10000000 // 10 millones de elementos
 
 // VERSIÓN EN C PURO (NO MODIFICAR)
 long long producto_punto_c(int *a, int *b, int n) {
@@ -22,21 +22,21 @@ long long producto_punto_asm(int *a, int *b, int n) {
     long long suma = 0;
     asm volatile (
         "xor %%rax, %%rax\n\t"             // RAX = 0 (Acumulador para la suma)
-        "xor %%rcx, %%rcx\n\t"             // RCX = 0 (Índice 'i' para el bucle)[cite: 9]
+        "xor %%rcx, %%rcx\n\t"             // RCX = 0 (Índice 'i' para el bucle)
         "1:\n\t"                           // Etiqueta local de inicio del bucle
         "cmp %3, %%rcx\n\t"                // Comparar índice RCX con la cantidad de elementos 'n'
-        "jge 2f\n\t"                       // Si RCX >= n, salir del bucle saltando a la etiqueta 2[cite: 14]
+        "jge 2f\n\t"                       // Si RCX >= n, salir del bucle saltando a la etiqueta 2
         "movslq (%1, %%rcx, 4), %%r8\n\t"  // Leer a[i] y extender signo de 32 a 64 bits hacia R8
-        "movslq (%2, %%rcx, 4), %%r9\n\t"  // Leer b[i] y extender signo de 32 a 64 bits hacia R9[cite: 8, 9]
-        "imul %%r9, %%r8\n\t"              // Multiplicación con signo: R8 = R8 * R9[cite: 9]
-        "add %%r8, %%rax\n\t"              // Suma: Agregar el producto al acumulador RAX[cite: 9]
-        "inc %%rcx\n\t"                    // Incrementar el índice (i++)[cite: 14]
-        "jmp 1b\n\t"                       // Bucle: regresar a la etiqueta 1[cite: 14]
-        "2:\n\t"                           // Etiqueta local de fin[cite: 14]
-        "mov %%rax, %0\n\t"                // Mover el resultado final a la variable de salida[cite: 14]
-        : "=r" (suma)                      // %0: Salida hacia variable 'suma'[cite: 9]
-        : "r" (a), "r" (b), "r" ((long long)n) // %1 = a, %2 = b, %3 = n[cite: 9]
-        : "%rax", "%rcx", "%r8", "%r9", "cc" // Registros modificados protegidos en clobber[cite: 9]
+        "movslq (%2, %%rcx, 4), %%r9\n\t"  // Leer b[i] y extender signo de 32 a 64 bits hacia R9
+        "imul %%r9, %%r8\n\t"              // Multiplicación con signo: R8 = R8 * R9
+        "add %%r8, %%rax\n\t"              // Suma: Agregar el producto al acumulador RAX
+        "inc %%rcx\n\t"                    // Incrementar el índice (i++)
+        "jmp 1b\n\t"                       // Bucle: regresar a la etiqueta 1
+        "2:\n\t"                           // Etiqueta local de fin
+        "mov %%rax, %0\n\t"                // Mover el resultado final a la variable de salida
+        : "=r" (suma)                      // %0: Salida hacia variable 'suma'
+        : "r" (a), "r" (b), "r" ((long long)n) // %1 = a, %2 = b, %3 = n
+        : "%rax", "%rcx", "%r8", "%r9", "cc" // Registros modificados protegidos en clobber
     );
     return suma;
 }
